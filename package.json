@@ -1,0 +1,23 @@
+{
+  "name": "thunder-note",
+  "version": "1.0.0",
+  "description": "A notes application using MERN stack and  using Redux for state management.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon backend_thunder-note/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rupeshgupta369/thunder-note.git"
+  },
+  "author": "Rupesh Gupta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rupeshgupta369/thunder-note/issues"
+  },
+  "homepage": "https://github.com/rupeshgupta369/thunder-note#readme",
+  "dependencies": {
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2"
+  }
+}
