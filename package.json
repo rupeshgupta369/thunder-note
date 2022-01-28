@@ -4,7 +4,7 @@
   "description": "A notes application using MERN stack and  using Redux for state management.",
   "main": "server.js",
   "scripts": {
-    "start": "node backend_thunder-note/server.js"
+    "start": "nodemon backend_thunder-note/server.js"
   },
   "repository": {
     "type": "git",
