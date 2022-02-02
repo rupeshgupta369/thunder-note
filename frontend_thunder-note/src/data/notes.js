@@ -1,4 +1,4 @@
-// dummy data to demonstrate the API from backend to front end
+/* // dummy data to demonstrate the API from backend to front end
 const notes = [
     {
         _id: "1",
@@ -25,7 +25,4 @@ const notes = [
     },
 ]
 
-module.exports = notes;
-
-
-
+module.exports = notes; */
