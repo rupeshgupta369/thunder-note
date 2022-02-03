@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./LandingPage.css"
-import {  Container, Row, Button } from "react-bootstrap"
+import { Container, Row, Button } from "react-bootstrap"
 const LandingPage = () => {
+    // useEffect(() => {
+    //     const userInfo = localStorage.getItem("userInfo")
+
+    //     /* Checking if the user is logged in and if they are, it will redirect them to the mynotes page. */
+    //     if (userInfo) {
+    //         history.push("/mynotes")
+    //     }
+    // }, [history]);
+
     return <div className='main'>
         <Container>
             <Row>

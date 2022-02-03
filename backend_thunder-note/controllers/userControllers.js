@@ -7,10 +7,8 @@ function and returns a function that can be used as a middleware. We are going t
 */
 const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, pic } = req.body;
-
     /* The below code is checking if the user exists in the database. */
     const userExists = await User.findOne({ email })
-
     if (userExists) {
         res.status(400)
         throw new Error("User Already Exists")
@@ -40,12 +38,11 @@ const registerUser = asyncHandler(async (req, res) => {
 
 })
 
-
 // for login
 const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
         res.json({
@@ -62,5 +59,4 @@ const authUser = asyncHandler(async (req, res) => {
         throw new Error("Invalid Email or Password!")
     }
 })
-
 module.exports = { registerUser, authUser };
