@@ -1,7 +1,11 @@
 import React from 'react';
 import { Container, Form, FormControl, Nav, Navbar, NavDropdown } from "react-bootstrap"
-import { Link } from 'react-router-dom';
+import { Link, /* `useHistory` is a React hook that gives you a React Router history object. */
+useHistory } from 'react-router-dom';
+
 const Header = () => {
+
+    const history = useHistory();
     return (
         <Navbar bg="primary" expand="lg" variant="dark">
             <Container>
@@ -11,7 +15,7 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="m-auto">
-                        <Form inline>
+                        <Form inline="true">
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                         </Form>
                     </Nav>
@@ -23,7 +27,11 @@ const Header = () => {
                         <NavDropdown title="Rupesh Gupta" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
+                            <NavDropdown.Item
+                                onClick={() => {
+                                    localStorage.removeItem("userInfo")
+                                    history.push("/")
+                                }}> Logout </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
 
