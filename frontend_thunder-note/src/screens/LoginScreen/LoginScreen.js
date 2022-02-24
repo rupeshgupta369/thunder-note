@@ -102,5 +102,4 @@ const LoginScreen = ({ history }) => {
         </MainScreen>
     )
 };
-
 export default LoginScreen;
