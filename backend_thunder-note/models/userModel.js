@@ -12,6 +12,8 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+       /* This is defining the email field as a String type. This means that the value of this field
+       can only be a string. */
         email: {
             type: String,
             required: true,
@@ -21,6 +23,8 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+      /* This is defining the isAdmin field as a Boolean type. This means that the value of this field
+      can only be true or false. */
         isAdmin: {
             type: Boolean,
             required: true,
@@ -33,7 +37,9 @@ const userSchema = mongoose.Schema(
         },
     },
     {
-        timestamps: true,
+        // TIme stamps to see whent the note is created & when it was updated
+        timestamps: true, 
+
 
     },
 );
