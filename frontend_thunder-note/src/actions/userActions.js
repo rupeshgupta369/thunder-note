@@ -9,13 +9,14 @@ import {
 } from "../constants/userConstants";
 import axios from "axios";
 
+
 export const login = (email, password) => async (dispatch) => {
     try {
-        dispatch({ type: USER_LOGIN_REQUEST })
+        dispatch({ type: USER_LOGIN_REQUEST });
 
         const config = {
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
             },
         };
 
@@ -24,7 +25,8 @@ export const login = (email, password) => async (dispatch) => {
             { email, password },
             config
         );
-        dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
+
+        dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
         localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
@@ -40,9 +42,8 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
     localStorage.removeItem("userInfo");
-    dispatch({ type: USER_LOGOUT })
-}
-
+    dispatch({ type: USER_LOGOUT });
+};
 
 export const register = (name, email, password, pic) => async (dispatch) => {
     try {
@@ -59,13 +60,13 @@ export const register = (name, email, password, pic) => async (dispatch) => {
             { name, pic, email, password },
             config
         );
+
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
 
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
         localStorage.setItem("userInfo", JSON.stringify(data));
-    }
-    catch (error) {
+    } catch (error) {
         dispatch({
             type: USER_REGISTER_FAIL,
             payload:

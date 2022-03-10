@@ -1,37 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Accordion, Badge, Button, Card } from 'react-bootstrap';
 import MainScreen from '../../components/MainScreen/MainScreen';
-import { Link } from "react-router-dom";
-import axios from "axios"
-const MyNotes = () => {
+import { Link, useHistory } from "react-router-dom";
+// import axios from "axios"
+import { useDispatch, useSelector } from "react-redux"
+import { listNotes } from '../../actions/noteActions';
+import Loading from "../../components/Loading"
+import ErrorMessage from "../../components/ErrorMessage"
 
-    const [notes, setNotes] = useState([]);
+const MyNotes = () => {
+    const dispatch = useDispatch();
+    const noteList = useSelector(state => state.noteList)
+    console.log(noteList);
+    /* This is destructuring the noteList state from the store. */
+    const { loading, notes, error } = noteList;
+    /* 
+    removed
+    // const [notes, setNotes] = useState([]);
+    */
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin;
 
     const deleteHandler = (id) => {
         if (window.confirm("Are you sure?")) {
         }
     }
 
-    const fetchNotes = async () => {
-        const { data } = await axios.get("/api/notes");
-        // console.log(data);
-        setNotes(data)
-    }
+    //   
+    /*removed 
+       const fetchNotes = async () => {
+            const { data } = await axios.get("/api/notes");
+            // console.log(data);
+            setNotes(data)
+        }
+     */
 
-    // console.log(notes);
+
+    console.log(notes);
+
+    const history = useHistory();
 
     useEffect(() => {
+        /* 
+        // rremoved
         fetchNotes();
-    }, []);
+         */
+        dispatch(listNotes())
+        if (!userInfo) {
+            history.push('/')
+        }
+    }, [dispatch]);
 
-    return (<MainScreen title="Welcome Back Rupesh Gupta">
+    return (<MainScreen title={`Welcome ${userInfo.name}`} >
         <Link to="createnote">
             <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
                 Create New Note
             </Button>
         </Link>
+        {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
+        {loading && <Loading />}
         {
-            notes.map(note => (
+            notes?.map(note => (
                 <Accordion key={note._id}>
                     <Card style={{ margin: 10 }} key={note._id}>
                         <Card.Header style={{ display: "flex" }}>
@@ -56,7 +86,7 @@ const MyNotes = () => {
                             </span>
 
                             <div>
-                                <Button href={`/note/${note._id}`}>Edit</Button>
+                                <Button href={`/ note / ${note._id}`}>Edit</Button>
                                 <Button
                                     variant="danger"
                                     className="mx-2"
@@ -76,7 +106,10 @@ const MyNotes = () => {
                                 <blockquote className="blockquote mb-0">
                                     <p>{note.content}</p>
                                     <footer className="blockquote-footer">
-                                        Created on date
+                                        Created on date{" "}
+                                        <cite title='Source Title'>
+                                            {note.createdAt.substring(0, 10)}
+                                        </cite>
                                     </footer>
                                 </blockquote>
                             </Card.Body>
@@ -85,9 +118,8 @@ const MyNotes = () => {
                 </Accordion>
             ))
         }
-    </MainScreen >
+        {/* here title is title and MyNotes is children*/}
+    </MainScreen>
     );
 };
-
 export default MyNotes;
-/* here title is title and Mynotes is children */
