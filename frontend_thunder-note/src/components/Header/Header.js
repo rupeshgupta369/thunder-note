@@ -35,29 +35,32 @@ const Header = ({ setSearch }) => {
                             />
                         </Form>
                     </Nav>
-                    <Nav /* className="mr-auto" */>
-                        <Nav.Link href="/mynotes">
-                            <Link to="/mynotes">My Notes</Link>
-                        </Nav.Link>
-                        {/* <Nav.Link href="#link">Link</Nav.Link> */}
-                        <NavDropdown title="Rupesh Gupta" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item
-                                /* 
-                        
-                                onClick={() => {
-                                    localStorage.removeItem("userInfo")
-                                    history.push("/")
-                                }} */
-                                onClick={logoutHandler}>
-                                Logout </NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
 
+                    <Nav /* className="mr-auto" */>
+                        {userInfo ? (
+                            <>
+                                <Nav.Link href="/mynotes">
+                                    <Link to="/mynotes">My Notes</Link>
+                                </Nav.Link>
+                                {/* <Nav.Link href="#link">Link</Nav.Link> */}
+                                <NavDropdown title={userInfo?.name} id="basic-nav-dropdown">
+                                    <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item
+                                        /* 
+                                        onClick={() => {localStorage.removeItem("userInfo")
+                                            history.push("/")
+                                        }} */
+                                        onClick={logoutHandler}>Logout </NavDropdown.Item>
+                                </NavDropdown>
+                            </>
+                        ) : (
+                            <Nav.Link href="/login">Login</Nav.Link>
+                        )}
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar >
+        </Navbar>
     );
 };
 

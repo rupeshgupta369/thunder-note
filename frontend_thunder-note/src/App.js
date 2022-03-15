@@ -9,6 +9,7 @@ import RegisterScreen from './screens/RegisterScreen/RegisterScreen';
 import CreateNote from './screens/CreateNote/CreateNote';
 import UpdateNote from './screens/UpdateNote/UpdateNote';
 import { useState } from 'react';
+import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 
 const App = () => {
   const [search, setSearch] = useState("")
@@ -17,12 +18,15 @@ const App = () => {
     /* Routing the user to the landing page. */
     <BrowserRouter>
       <Header setSearch={setSearch} />
-      <Route path="/" component={LandingPage} exact />
-      <Route path="/login" component={LoginScreen} exact />
-      <Route path="/register" component={RegisterScreen} exact />
-      <Route path="/createnote" component={CreateNote} exact />
-      <Route path="/note/:id" component={UpdateNote} exact />
-      <Route path="/mynotes" component={() => <MyNotes search={search} />} />
+      <main>
+        <Route path="/" component={LandingPage} exact />
+        <Route path="/login" component={LoginScreen} exact />
+        <Route path="/register" component={RegisterScreen} exact />
+        <Route path="/createnote" component={CreateNote} exact />
+        <Route path="/note/:id" component={UpdateNote} exact />
+        <Route path="/mynotes" component={() => <MyNotes search={search} />} />
+        <Route path="/profile" component={ProfileScreen} exact />
+      </main>
       <Footer />
     </BrowserRouter>
   );
