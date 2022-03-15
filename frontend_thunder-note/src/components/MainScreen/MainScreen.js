@@ -11,7 +11,7 @@ function MainScreen({ children, title }) {
             {title && (
               <>
                 <h1 className="heading">{title}</h1>
-                <hr />
+                <hr/>
               </>
             )}
             {children}
@@ -21,5 +21,4 @@ function MainScreen({ children, title }) {
     </div>
   );
 }
-
 export default MainScreen;

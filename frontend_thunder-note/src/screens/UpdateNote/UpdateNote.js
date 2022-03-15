@@ -1,23 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MainScreen from "../../components/MainScreen/MainScreen.js"
 import { Button, Card, Form } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { createNoteAction } from "../../actions/noteActions"
+import { deleteNoteAction, updateNoteAction } from "../../actions/noteActions"
 import Loading from "../../components/Loading"
 import ErrorMessage from "../../components/ErrorMessage"
 import ReactMarkdown from "react-markdown";
+import axios from "axios";
 
-function CreateNote({ history }) {
+function UpdateNote({ match, history }) {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [category, setCategory] = useState("")
+    const [date, setDate] = useState("")
 
     const dispatch = useDispatch()
 
-    const noteCreate = useSelector((state) => state.noteCreate);
-    const { loading, error, note } = noteCreate;
+    const noteUpdate = useSelector((state) => state.noteUpdate);
+    const { loading, error } = noteUpdate;
 
-    console.log(note);
+    const noteDelete = useSelector((state) => state.noteDelete);
+    const { loading: loadingDelete, error: errorDelete } = noteDelete;
+
+    const deleteHandler = (id) => {
+        if (window.confirm("Are you sure to delete the note")) {
+            dispatch(deleteNoteAction(id))
+        }
+        history.push("/mynotes")
+    }
+
+
+    useEffect(() => {
+        const fetching = async () => {
+            const { data } = await axios.get(`/api/notes/${match.params.id}`);
+
+            setTitle(data.title);
+            setContent(data.content);
+            setCategory(data.category);
+            setDate(data.updatedAt);
+        };
+
+        fetching();
+    }, [match.params.id, date]);
 
     const resetHandler = () => {
         setTitle("");
@@ -25,21 +49,28 @@ function CreateNote({ history }) {
         setContent("");
     };
 
-    const submitHandler = (e) => {
+    const updateHandler = (e) => {
         e.preventDefault();
+        dispatch(updateNoteAction(match.params.id, title, content, category));
         if (!title || !content || !category) return;
-        dispatch(createNoteAction(title, content, category));
         resetHandler();
         history.push("/mynotes")
     };
 
     return (
-        <MainScreen title="Create a Note">
+        <MainScreen title="Edit Note">
             <Card>
-                <Card.Header>Create a new Note</Card.Header>
+                <Card.Header>Edit your Note</Card.Header>
                 <Card.Body>
-                    <Form onSubmit={submitHandler}>
+                    <Form onSubmit={updateHandler}>
+                        {loadingDelete && <Loading />}
+
                         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+
+                        {errorDelete && (
+                            <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+                        )}
+
                         <Form.Group controlId="title">
                             <Form.Label>Title</Form.Label>
                             <Form.Control
@@ -73,27 +104,34 @@ function CreateNote({ history }) {
                             <Form.Label>Category</Form.Label>
                             <Form.Control
                                 type="content"
-                                value={category}
                                 placeholder="Enter the Category"
+                                value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                             />
                         </Form.Group>
                         {loading && <Loading size={50} />}
+
                         <Button type="submit" variant="primary">
-                            Create Note
+                            Update Note
                         </Button>
-                        <Button className="mx-2" onClick={resetHandler} variant="danger">
-                            Reset Feilds
+
+                        <Button
+                            className="mx-2"
+                            // onClick={deleteHandler(match.params.id)}
+                            onClick={() => deleteHandler(match.params.id)}
+                            variant="danger">
+                            Delete Note
                         </Button>
+
                     </Form>
                 </Card.Body>
 
                 <Card.Footer className="text-muted">
-                    Creating on - {new Date().toLocaleDateString()}
+                    Updated on - {date.substring(0, 10)}
                 </Card.Footer>
             </Card>
         </MainScreen>
-    )
+    );
 }
 
-export default CreateNote
+export default UpdateNote;
