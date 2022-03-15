@@ -32,20 +32,19 @@ app.get("/api/notes/:id/:id2", (req, res) => {
 // })
 
 
-/* This is telling express to use the express.json() middleware. This middleware allows us to receive
-JSON data from the client. */
+/* This is telling express to use the express.json() middleware. This middleware allows us to receive JSON data from the client. */
 app.use(express.json())
 
-/* This is the code that is telling the server to use the userRoutes.js file when the user goes to the
-/api/users route. */
+// users Endpoint
+
 app.use("/api/users", userRoutes)
-/* This is telling the server to use the noteRoutes.js file when the user goes to the /api/notes route. */
+
+/* notes endpoint */
 app.use("/api/notes", noteRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
 
-// console.log(process.env.PORT)
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, console.log(`Server started on PORT ${PORT}`));
