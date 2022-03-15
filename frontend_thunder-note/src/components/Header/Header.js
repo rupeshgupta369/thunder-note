@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { logout } from '../../actions/userActions';
 
-const Header = () => {
+const Header = ({ setSearch }) => {
 
     const history = useHistory();
 
@@ -30,7 +30,9 @@ const Header = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="m-auto">
                         <Form inline="true">
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                            <FormControl type="text" placeholder="Search" className="mr-sm-2"
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
                         </Form>
                     </Nav>
                     <Nav /* className="mr-auto" */>
