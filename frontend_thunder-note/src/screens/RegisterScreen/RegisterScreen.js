@@ -27,7 +27,7 @@ const RegisterScreen = (history) => {
 
   useEffect(() => {
     if (userInfo) {
-      history.push("/mynotes");
+      history.push("/");
     }
   }, [history, userInfo]);
 
