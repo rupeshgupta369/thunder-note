@@ -12,6 +12,7 @@ frontend_thunder-note/node_modules
 
 # production
 /build
+/frontend_thunder-note/build
 
 # misc
 .DS_Store
