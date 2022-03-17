@@ -7,7 +7,7 @@
     "start": "nodemon backend_thunder-note/server.js",
     "client": "npm start --prefix frontend_thunder-note",
     "dev": "concurrently \"npm start\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend_thunder-note && npm run build --prefix frontend_thunder-note"
   },
   "repository": {
     "type": "git",
