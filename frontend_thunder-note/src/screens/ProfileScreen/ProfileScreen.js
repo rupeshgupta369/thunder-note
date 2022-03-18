@@ -60,7 +60,7 @@ const ProfileScreen = () => {
 
                 }).then((res) => res.json())
                 .then((data) => {
-                    console.log(data);
+                    // console.log(data);
                     setPic(data.url.toString());
                 })
                 .catch((err) => {
