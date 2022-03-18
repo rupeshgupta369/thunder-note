@@ -13,19 +13,19 @@ import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
 
 const App = () => {
   const [search, setSearch] = useState("")
-  console.log(search);
+  // console.log(search);
   return (
     /* Routing the user to the landing page. */
     <BrowserRouter>
       <Header setSearch={setSearch} />
       <main>
         <Route path="/" component={LandingPage} exact />
-        <Route path="/login" component={LoginScreen} exact />
-        <Route path="/register" component={RegisterScreen} exact />
-        <Route path="/createnote" component={CreateNote} exact />
-        <Route path="/note/:id" component={UpdateNote} exact />
+        <Route path="/login" component={LoginScreen} />
+        <Route path="/register" component={RegisterScreen} />
+        <Route path="/createnote" component={CreateNote} />
+        <Route path="/note/:id" component={UpdateNote} />
         <Route path="/mynotes" component={() => <MyNotes search={search} />} />
-        <Route path="/profile" component={ProfileScreen} exact />
+        <Route path="/profile" component={ProfileScreen} />
       </main>
       <Footer />
     </BrowserRouter>
