@@ -1,1 +1,1 @@
-web : node backend_thunder-note/server.js
+web: node backend_thunder-note/server.js
