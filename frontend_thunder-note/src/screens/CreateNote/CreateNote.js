@@ -16,7 +16,7 @@ function CreateNote({ history }) {
 
     const noteCreate = useSelector((state) => state.noteCreate);
     const { loading, error, note } = noteCreate;
-    console.log(note);
+    // console.log(note);
     const resetHandler = () => {
         setTitle("");
         setCategory("");

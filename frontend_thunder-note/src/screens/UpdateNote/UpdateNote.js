@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import MainScreen from "../../components/MainScreen/MainScreen.js"
 import { Button, Card, Form } from "react-bootstrap"
+import ErrorMessage from "../../components/ErrorMessage"
+import Loading from "../../components/Loading"
 import { useDispatch, useSelector } from "react-redux"
 import { deleteNoteAction, updateNoteAction } from "../../actions/noteActions"
-import Loading from "../../components/Loading"
-import ErrorMessage from "../../components/ErrorMessage"
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
 

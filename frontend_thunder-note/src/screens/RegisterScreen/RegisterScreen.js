@@ -3,13 +3,14 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ErrorMessage from '../../components/ErrorMessage';
 import MainScreen from '../../components/MainScreen/MainScreen';
-import axios from 'axios';
+// import axios from 'axios';
 import Loading from '../../components/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from "../../actions/userActions";
+import "./RegisterScreen.css";
 
 
-const RegisterScreen = (history) => {
+const RegisterScreen = ({ history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pic, setPic] = useState("https://cdn.pixabay.com/photo/2016/03/31/14/47/avatar-1292817_960_720.png");
@@ -31,7 +32,7 @@ const RegisterScreen = (history) => {
     }
   }, [history, userInfo]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault()
 
     if (password !== confirmPassword) {
@@ -85,7 +86,7 @@ const RegisterScreen = (history) => {
 
         }).then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           setPic(data.url.toString());
         })
         .catch((err) => {
@@ -99,7 +100,7 @@ const RegisterScreen = (history) => {
   return (
     <MainScreen title="REGISTER">
       <div className='loginContainer'>
-        {/*  {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}*/}
+        {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
         {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
         {loading && <Loading />}
         <Form onSubmit={submitHandler}>
@@ -164,7 +165,7 @@ const RegisterScreen = (history) => {
 
         <Row className="py-3">
           <Col>
-            Have an Account ?<Link to="/login">Login</Link>
+            Have an Account? <Link to="/login">Login</Link>
           </Col>
         </Row>
 
